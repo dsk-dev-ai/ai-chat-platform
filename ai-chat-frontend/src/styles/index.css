@@ -2,6 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ChatGPT-inspired design */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f7f8;
+  --bg-sidebar: #f7f7f8;
+  --bg-chat: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #6b7280;
+  --accent: #10a37f;
+  --accent-hover: #0d8f6b;
+  --border: #e5e7eb;
+  --user-message: #2d3748;
+  --ai-message: #ffffff;
+  --user-text: #ffffff;
+  --ai-text: #000000;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+  --warning-border: #f59e0b;
+  --sidebar-width: 260px;
+}
+
+.dark {
+  --bg-primary: #343541;
+  --bg-secondary: #202123;
+  --bg-sidebar: #202123;
+  --bg-chat: #343541;
+  --text-primary: #ffffff;
+  --text-secondary: #acacbe;
+  --accent: #10a37f;
+  --accent-hover: #0d8f6b;
+  --border: #565869;
+  --user-message: #2d3748;
+  --ai-message: #444654;
+  --user-text: #ffffff;
+  --ai-text: #ffffff;
+  --warning-bg: #451a03;
+  --warning-text: #fb923c;
+  --warning-border: #ea580c;
+}
+
+/* Subtle animations for professional feel */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.2s ease-out;
+}
+
+.animate-typing {
+  animation: typing 1.5s steps(40, end);
+}
+
+/* Clean scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Professional body styles */
 body {
   margin: 0;
   padding: 0;
@@ -10,6 +109,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 code {

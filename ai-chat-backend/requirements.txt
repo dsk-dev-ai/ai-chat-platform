@@ -1,4 +1,6 @@
 flask
 flask-cors
-werkzeug
 python-dotenv
+werkzeug
+PyJWT
+requests

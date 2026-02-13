@@ -1,0 +1,5 @@
+{
+  "message": "Registration token generated successfully. Please use this token to complete your registration within 1 minute.",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJleHAiOjE3NzAzMjI0OTJ9.wNvKkBR9FsU6q0fy1rZeGhtMjUg4ffIzRe6iaR7HX1c",
+  "expires_in": "1 minute"
+}
