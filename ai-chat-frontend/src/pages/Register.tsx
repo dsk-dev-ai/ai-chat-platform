@@ -19,9 +19,9 @@ export default function Register() {
     try {
       const response = await sendVerificationCode(email);
       setCodeSent(true);
-      // If token is returned in response (fallback for email failure), show it
-      if (response.token) {
-        setFallbackToken(response.token);
+      // If a code is returned (fallback when no email transport), show it
+      if (response.code || response.token) {
+        setFallbackToken(response.code || response.token);
       }
     } catch (error: any) {
       setError(error.response?.data?.error || "Failed to send registration token");

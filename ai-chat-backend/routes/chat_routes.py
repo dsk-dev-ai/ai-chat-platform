@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from services.ollama_service import ask_llm
 from services.history_service import save_message
-from services.limit_service import allowed
+from services.limit_service import allowed, free_chat_allowed
 from utils.auth_utils import get_user_id_from_token
 from models.chat_model import get_chat_by_id, update_chat_title
 
@@ -9,20 +9,28 @@ chat_bp = Blueprint("chat", __name__)
 
 @chat_bp.route("/chat", methods=["POST"])
 def chat():
-    data = request.json
+    data = request.json or {}
+    chat_id = data.get("chat_id")
+    user_msg = data.get("message")
 
-    chat_id = data["chat_id"]
-    user_msg = data["message"]
+    if not chat_id or not user_msg:
+        return jsonify({"error": "chat_id and message are required"}), 400
 
     user_id = get_user_id_from_token()
+    if not user_id:
+        return jsonify({"error": "Authentication required"}), 401
+
+    chat = get_chat_by_id(chat_id)
+    if not chat or chat["user_id"] != user_id:
+        return jsonify({"error": "Chat not found"}), 404
+
     if not allowed(user_id):
         return jsonify({"error": "Daily chat limit reached. Upgrade your plan to continue chatting."}), 429
 
     save_message(chat_id, "user", user_msg, user_id)
 
     # Generate topic if chat title is still "New Chat"
-    chat = get_chat_by_id(chat_id)
-    if chat and chat["title"] == "New Chat":
+    if chat["title"] == "New Chat":
         # Use first 50 characters of user message as topic, or generate via LLM
         topic = user_msg[:50].strip()
         if len(topic) < 10:  # If too short, try to generate a better title
@@ -41,10 +49,17 @@ def chat():
 
 @chat_bp.route("/free-chat", methods=["POST"])
 def free_chat():
-    data = request.json
-    user_msg = data["message"]
+    data = request.json or {}
+    user_msg = data.get("message")
 
-    # For free chat, no user_id, so no limit check (handled in frontend)
+    if not user_msg:
+        return jsonify({"error": "message required"}), 400
+
+    # Server-side IP-based rate limit (the frontend limit is bypassable)
+    client_ip = request.remote_addr or "unknown"
+    if not free_chat_allowed(client_ip):
+        return jsonify({"error": "Free chat limit reached. Please try again later."}), 429
+
     reply = ask_llm(user_msg)
 
     return jsonify({"reply": reply})

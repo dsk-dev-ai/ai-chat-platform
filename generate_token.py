@@ -1,11 +1,12 @@
+import os
+import sys
 import jwt
 from datetime import datetime, timedelta, timezone
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "ai-chat-backend"))
+from config import Config
 
-SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key_for_testing")
+SECRET_KEY = Config.SECRET_KEY
 
 email = "test@example.com"
 

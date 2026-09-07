@@ -65,13 +65,14 @@ def get_chat_by_id(chat_id):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-    SELECT id, title, created_at FROM chats WHERE id = ?
+    SELECT id, user_id, title, created_at FROM chats WHERE id = ?
     """, (chat_id,))
     row = cursor.fetchone()
     conn.close()
 
     return {
         "id": row["id"],
+        "user_id": row["user_id"],
         "title": row["title"],
         "createdAt": row["created_at"]
     } if row else None
