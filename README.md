@@ -108,6 +108,28 @@ Easily extendable to OpenAI API
 
 ✅ Secure backend architecture
 
+# ✅ Tests & CI
+
+## Backend Tests
+
+```bash
+cd ai-chat-backend
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+pytest
+```
+
+Runs the backend test suite (request validation, auth/registration flow, token
+counting, rate limiting, and config defaults) against an isolated throwaway
+SQLite database — no network, external services, or a live Ollama server needed.
+
+## CI
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on every push/PR to `main`:
+
+- `backend-tests` — installs the backend dependencies and runs `pytest`
+- `frontend-build` — installs frontend deps with `npm ci` and runs `npm run build`
+
 📌 Version
 
 Current Version: v3.0

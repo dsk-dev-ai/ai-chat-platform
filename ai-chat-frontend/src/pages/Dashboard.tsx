@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { sendMessage } from "../api/chat";
 import { fetchHistory, fetchUserChats, createChat } from "../api/history";
 import { getCurrentUser } from "../api/auth";

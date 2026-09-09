@@ -68,7 +68,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                 Refresh Page
               </button>
             </div>
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {(import.meta as any).env?.DEV && this.state.error && (
               <details className="mt-6 text-left">
                 <summary className="cursor-pointer text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                   Error Details (Development Mode)
