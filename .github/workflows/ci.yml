@@ -33,7 +33,6 @@ jobs:
   frontend-build:
     name: Frontend (build)
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('ai-chat-frontend/package-lock.json') != '' && hashFiles('ai-chat-frontend/package.json') != '' }}
     defaults:
       run:
         working-directory: ai-chat-frontend
