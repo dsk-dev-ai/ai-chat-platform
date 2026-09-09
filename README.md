@@ -1,6 +1,9 @@
 # ai-chat-platform
 Full stack AI Chat SaaS with React + Flask + Ollama (Local LLM)
 
+[![CI](https://github.com/dsk-dev-ai/ai-chat-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/dsk-dev-ai/ai-chat-platform/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # AI Chat Platform (Full Stack SaaS)
 
 Full Stack AI Chat SaaS built with:
